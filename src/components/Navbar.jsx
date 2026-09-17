@@ -161,7 +161,7 @@ export default function Navbar() {
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="border-b border-line bg-ink/95 backdrop-blur-xl">
+            <div className="border-b border-line bg-transparent backdrop-blur-xl">
               <div className="container-lux py-8">
                 <ul className="flex flex-col gap-y-1">
                   {navLinks.map((l, i) => (

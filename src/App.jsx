@@ -8,7 +8,6 @@ import ProjectIntro from "./components/ProjectIntro";
 import ProjectStats from "./components/ProjectStats";
 import ResidenceSelector from "./components/ResidenceSelector";
 import FloorPlanViewer from "./components/FloorPlanViewer";
-import LayoutSection from "./components/LayoutSection";
 import Amenities from "./components/Amenities";
 import LifestyleSection from "./components/LifestyleSection";
 import Gallery from "./components/Gallery";
@@ -38,7 +37,6 @@ export default function App() {
           <ProjectStats />
           <ResidenceSelector />
           <FloorPlanViewer />
-          <LayoutSection />
           <Amenities />
           <LifestyleSection />
           <Gallery />
