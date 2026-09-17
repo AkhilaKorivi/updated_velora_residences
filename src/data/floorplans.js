@@ -5,22 +5,16 @@ const base3 = [
     desc: "A 12-ft-wide balustrade balcony running along the northern elevation with panoramic city views." },
   { id: "bedroom2", name: "Bedroom 2", x: 40, y: 98, w: 220, h: 180, type: "bedroom",
     desc: "Quiet courtyard-facing bedroom with generous wardrobe space and abundant natural light." },
-  { id: "bath2", name: "Bathroom", x: 268, y: 98, w: 96, h: 84, type: "bath",
-    desc: "Premium sanitary fittings with concealed plumbing and rainfall shower." },
   { id: "kitchen", name: "Kitchen", x: 372, y: 98, w: 148, h: 170, type: "kitchen",
     desc: "Modern kitchen with stone counters, modular cabinetry and utility access." },
   { id: "utility", name: "Utility", x: 372, y: 290, w: 148, h: 120, type: "utility",
     desc: "Dedicated utility zone for laundry and daily essentials." },
   { id: "bedroom3", name: "Bedroom 3", x: 40, y: 290, w: 220, h: 186, type: "bedroom",
     desc: "Flexible bedroom that works equally well as a study or guest suite." },
-  { id: "bath3", name: "Bathroom", x: 268, y: 290, w: 96, h: 100, type: "bath",
-    desc: "Well-ventilated bathroom with premium vitrified surfaces." },
   { id: "living", name: "Living & Dining", x: 528, y: 98, w: 352, h: 312, type: "living",
     desc: "Expansive living and dining space with full-height glazing facing the tower gardens." },
-  { id: "master", name: "Master Bedroom", x: 528, y: 418, w: 160, h: 150, type: "bedroom",
-    desc: "Spacious master suite with natural lighting, premium flooring and an attached bathroom." },
-  { id: "masterbath", name: "Master Bath", x: 696, y: 418, w: 184, h: 150, type: "bath",
-    desc: "En-suite Italian-tiled bath with soaking tub and rain shower." },
+  { id: "master", name: "Master Bedroom", x: 528, y: 418, w: 352, h: 150, type: "bedroom",
+    desc: "Spacious master suite with natural lighting and premium flooring." },
 ];
 
 const base4 = [
@@ -50,7 +44,6 @@ export const floorplans = [
 
 export const roomNotes = {
   bedroom: "Bedroom",
-  bath: "Bathroom",
   kitchen: "Kitchen",
   living: "Living & Dining",
   utility: "Utility",
