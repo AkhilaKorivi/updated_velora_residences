@@ -2,7 +2,6 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import { hero, heroMobile } from "../lib/images";
-import { useEnquiry } from "./EnquiryContext";
 
 const stagger = (reduce) => ({
   hidden: {},
@@ -22,7 +21,6 @@ export default function Hero({ intro }) {
   const bgY = useTransform(scrollYProgress, [0, 1], ["0%", reduce ? "0%" : "24%"]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
   const contentY = useTransform(scrollYProgress, [0, 1], [0, -80]);
-  const { openEnquiry } = useEnquiry();
 
   return (
     <section id="home" ref={ref} className="relative h-[100svh] min-h-[640px] overflow-hidden">
@@ -85,14 +83,6 @@ export default function Hero({ intro }) {
             >
               Explore Residences
             </a>
-            <button
-              type="button"
-              className="btn-lux btn-outline w-full sm:w-auto"
-              data-cursor="cta"
-              onClick={() => openEnquiry()}
-            >
-              Enquire Now
-            </button>
           </motion.div>
         </motion.div>
       </motion.div>

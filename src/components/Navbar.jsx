@@ -1,6 +1,6 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence, useScroll } from "framer-motion";
-import { Menu, X, Phone, ChevronDown } from "lucide-react";
+import { Menu, X, Phone } from "lucide-react";
 import clsx from "clsx";
 import { navLinks, contact } from "../config";
 import { useEnquiry } from "./EnquiryContext";
@@ -8,11 +8,9 @@ import { useEnquiry } from "./EnquiryContext";
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [active, setActive] = useState("home");
   const { openEnquiry } = useEnquiry();
   const { scrollY } = useScroll();
-  const dropdownRef = useRef(null);
 
   useEffect(() => {
     return scrollY.on("change", (v) => setScrolled(v > 50));
@@ -36,24 +34,9 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    const onKey = (e) => {
-      if (e.key === "Escape") {
-        setMenuOpen(false);
-        setDropdownOpen(false);
-      }
-    };
+    const onKey = (e) => e.key === "Escape" && setMenuOpen(false);
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, []);
-
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-        setDropdownOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   useEffect(() => {
@@ -100,29 +83,33 @@ export default function Navbar() {
             </span>
           </a>
 
-          <div className="flex items-center gap-3" ref={dropdownRef}>
-            <div className="hidden items-center lg:flex">
-              <button
-                type="button"
-                onClick={() => setDropdownOpen((v) => !v)}
-                className={clsx(
-                  "flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-wide2 transition-colors duration-300",
-                  dropdownOpen ? "text-gold" : "text-smoke/75 hover:text-smoke"
-                )}
-                aria-label="Open navigation menu"
-                aria-expanded={dropdownOpen}
-              >
-                <Menu className="h-4 w-4" aria-hidden="true" />
-                Menu
-                <ChevronDown
+          <ul className="hidden items-center gap-7 lg:flex">
+            {navLinks.map((l) => (
+              <li key={l.href}>
+                <a
+                  href={l.href}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    go(l.href);
+                  }}
                   className={clsx(
-                    "h-3 w-3 transition-transform duration-300",
-                    dropdownOpen && "rotate-180"
+                    "group relative pb-1 text-[11px] font-medium uppercase tracking-wide2 transition-colors duration-300",
+                    active === l.href.slice(1) ? "text-gold" : "text-smoke/75 hover:text-smoke"
                   )}
-                  aria-hidden="true"
-                />
-              </button>
-            </div>
+                >
+                  {l.label}
+                  <span
+                    className={clsx(
+                      "absolute bottom-0 left-0 h-px bg-gold transition-all duration-300",
+                      active === l.href.slice(1) ? "w-full" : "w-0 group-hover:w-full"
+                    )}
+                  />
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          <div className="flex items-center gap-3">
             <a
               href={contact.phoneHref}
               className="hidden items-center gap-2 text-[11px] uppercase tracking-wide2 text-mist transition-colors hover:text-gold xl:flex"
@@ -150,49 +137,6 @@ export default function Navbar() {
           </div>
         </nav>
       </motion.header>
-
-      <AnimatePresence>
-        {dropdownOpen && (
-          <motion.div
-            key="desktop-dropdown"
-            className="fixed inset-x-0 top-0 z-[89] hidden pt-[72px] lg:block"
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <div className="border-b border-line bg-transparent backdrop-blur-xl">
-              <div className="container-lux py-8">
-                <ul className="flex flex-col gap-y-1">
-                  {navLinks.map((l, i) => (
-                    <li key={l.href}>
-                      <a
-                        href={l.href}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setDropdownOpen(false);
-                          go(l.href);
-                        }}
-                        className={clsx(
-                          "group flex items-center gap-3 py-2 transition-colors duration-300",
-                          active === l.href.slice(1)
-                            ? "text-gold"
-                            : "text-smoke/75 hover:text-smoke"
-                        )}
-                      >
-                        <span className="text-[10px] text-gold/60">0{i + 1}</span>
-                        <span className="text-sm uppercase tracking-wide2 font-medium">
-                          {l.label}
-                        </span>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       <AnimatePresence>
         {menuOpen && (

@@ -1,6 +1,5 @@
 import { useCallback, useState } from "react";
 import PageLoader from "./components/PageLoader";
-import CustomCursor from "./components/CustomCursor";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Marquee from "./components/Marquee";
@@ -28,7 +27,6 @@ export default function App() {
     <EnquiryProvider>
       <PlanProvider>
         <PageLoader onDone={onLoaderDone} />
-        <CustomCursor />
         <Navbar />
         <main>
           <Hero intro={intro} />

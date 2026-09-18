@@ -4,6 +4,13 @@ import { contact, navLinks, socials } from "../config";
 
 const socialIcons = { Instagram, Facebook, Linkedin, Youtube };
 
+const iconFor = (label) => {
+  const key = Object.keys(socialIcons).find(
+    (k) => k.toLowerCase() === label.toLowerCase()
+  );
+  return socialIcons[key];
+};
+
 const scrollTop = (e) => {
   e.preventDefault();
   window.scrollTo({ top: 0, behavior: "smooth" });
@@ -46,7 +53,7 @@ export default function Footer() {
           </p>
           <div className="mt-6 flex items-center gap-2">
             {socials.map((s) => {
-              const Icon = socialIcons[s.label] || Instagram;
+              const Icon = iconFor(s.label);
               return (
                 <a
                   key={s.label}
